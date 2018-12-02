@@ -4,15 +4,15 @@ class RegistrationPage extends Component {
   state = {};
   render() {
     return (
-      <div class="cotainer">
-        <div class="row justify-content-center">
-          <div class="col-md-8">
-            <div class="card">
-              <div class="card-header">Register</div>
-              <div class="card-body">
-                <form>
-                  <div className="form-row">
-                    <div className="form-group col-md-6">
+      <div className="cotainer mt-4">
+        <div className="row justify-content-center">
+          <div className="col-md-6">
+            <div className="card">
+              <div className="card-header">Register</div>
+              <div className="card-body">
+                <form className="justify-content-center">
+                  <div className="form-row justify-content-center">
+                    <div className="form-group col-md-8">
                       <label for="inputEmail4">Email</label>
                       <input
                         type="email"
@@ -23,8 +23,8 @@ class RegistrationPage extends Component {
                     </div>
                   </div>
 
-                  <div className="form-row">
-                    <div className="form-group col-md-3">
+                  <div className="form-row justify-content-center">
+                    <div className="form-group col-md-4">
                       <label for="inputPassword4">Password</label>
                       <input
                         type="password"
@@ -33,7 +33,7 @@ class RegistrationPage extends Component {
                         placeholder="Password"
                       />
                     </div>
-                    <div className="form-group col-md-3">
+                    <div className="form-group col-md-4">
                       <label for="confirmPassword">Confirm Password</label>
                       <input
                         type="password"
@@ -44,8 +44,8 @@ class RegistrationPage extends Component {
                     </div>
                   </div>
 
-                  <div className="form-row">
-                    <div className="form-group col-md-3">
+                  <div className="form-row justify-content-center">
+                    <div className="form-group col-md-4">
                       <label for="userFirstName">First Name</label>
                       <input
                         type="text"
@@ -54,7 +54,7 @@ class RegistrationPage extends Component {
                         placeholder="First Name"
                       />
                     </div>
-                    <div className="form-group col-md-3">
+                    <div className="form-group col-md-4">
                       <label for="userSirName">Sir Name</label>
                       <input
                         type="text"
@@ -65,8 +65,8 @@ class RegistrationPage extends Component {
                     </div>
                   </div>
 
-                  <div className="form-row">
-                    <div className="form-group col-md-2">
+                  <div className="form-row justify-content-center">
+                    <div className="form-group col-md-3">
                       <label for="inputCity">City</label>
                       <input
                         type="text"
@@ -74,7 +74,7 @@ class RegistrationPage extends Component {
                         id="inputCity"
                       />
                     </div>
-                    <div className="form-group col-md-2">
+                    <div className="form-group col-md-3">
                       <label for="inputState">State</label>
                       <select id="inputState" className="form-control">
                         <option selected>Choose...</option>
@@ -91,8 +91,8 @@ class RegistrationPage extends Component {
                     </div>
                   </div>
 
-                  <div className="form-row">
-                    <div className="form-group col-md-6">
+                  <div className="form-row justify-content-center">
+                    <div className="form-group col-md-8">
                       <label for="inputAddress">Address</label>
                       <input
                         type="text"
