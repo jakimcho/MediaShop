@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const NavigationBar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="#">
+      <Link className="navbar-brand" to="#">
         Media Shop
-      </a>
+      </Link>
       <button
         className="navbar-toggler"
         type="button"
@@ -20,24 +21,24 @@ const NavigationBar = () => {
       <div className="collapse navbar-collapse" id="navbarText">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
-            <a className="nav-link" href="/">
+            <Link className="nav-link" to="/">
               Home <span className="sr-only">(current)</span>
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/movies">
+            <Link className="nav-link" to="/movies">
               Movies
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/books">
+            <Link className="nav-link" to="/books">
               Books
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/songs">
+            <Link className="nav-link" to="/songs">
               Songs
-            </a>
+            </Link>
           </li>
         </ul>
         <form className="form-inline my-2 my-lg-0">
@@ -60,12 +61,12 @@ const NavigationBar = () => {
             Login
           </button>
         </form>
-        <a
+        <Link
           className="btn btn-outline-success my-2 my-sm-0 m-2"
-          href="/register"
+          to="/registration"
         >
           Register
-        </a>
+        </Link>
       </div>
     </nav>
   );
