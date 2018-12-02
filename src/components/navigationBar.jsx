@@ -40,6 +40,32 @@ const NavigationBar = () => {
             </a>
           </li>
         </ul>
+        <form className="form-inline my-2 my-lg-0">
+          <input
+            className="form-control mr-sm-1"
+            type="email"
+            placeholder="username"
+            aria-label="username"
+          />
+          <input
+            className="form-control mr-sm-1"
+            type="password"
+            placeholder="password"
+            aria-label="password"
+          />
+          <button
+            className="btn btn-outline-success my-2 my-sm-0"
+            type="submit"
+          >
+            Login
+          </button>
+        </form>
+        <a
+          className="btn btn-outline-success my-2 my-sm-0 m-2"
+          href="/register"
+        >
+          Register
+        </a>
       </div>
     </nav>
   );
