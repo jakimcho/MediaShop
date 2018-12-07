@@ -2,6 +2,15 @@ import React, { Component } from "react";
 
 class RegistrationPage extends Component {
   state = {};
+
+  username = React.createRef;
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    console.log("Sending data with user name: ", this.username.current.value);
+  };
+
   render() {
     return (
       <div className="cotainer mt-4">
@@ -10,22 +19,26 @@ class RegistrationPage extends Component {
             <div className="card">
               <div className="card-header">Register</div>
               <div className="card-body">
-                <form className="justify-content-center">
+                <form
+                  className="justify-content-center"
+                  onSubmit={this.handleSubmit}
+                >
                   <div className="form-row justify-content-center">
                     <div className="form-group col-md-8">
-                      <label for="inputEmail4">Email</label>
+                      <label htmlFor="inputEmail4">Email</label>
                       <input
                         type="email"
                         className="form-control"
                         id="inputEmail4"
                         placeholder="Email"
+                        ref={this.username}
                       />
                     </div>
                   </div>
 
                   <div className="form-row justify-content-center">
                     <div className="form-group col-md-4">
-                      <label for="inputPassword4">Password</label>
+                      <label htmlFor="inputPassword4">Password</label>
                       <input
                         type="password"
                         className="form-control"
@@ -34,7 +47,7 @@ class RegistrationPage extends Component {
                       />
                     </div>
                     <div className="form-group col-md-4">
-                      <label for="confirmPassword">Confirm Password</label>
+                      <label htmlFor="confirmPassword">Confirm Password</label>
                       <input
                         type="password"
                         className="form-control"
@@ -46,7 +59,7 @@ class RegistrationPage extends Component {
 
                   <div className="form-row justify-content-center">
                     <div className="form-group col-md-4">
-                      <label for="userFirstName">First Name</label>
+                      <label htmlFor="userFirstName">First Name</label>
                       <input
                         type="text"
                         className="form-control"
@@ -55,7 +68,7 @@ class RegistrationPage extends Component {
                       />
                     </div>
                     <div className="form-group col-md-4">
-                      <label for="userSirName">Sir Name</label>
+                      <label htmlFor="userSirName">Sir Name</label>
                       <input
                         type="text"
                         className="form-control"
@@ -67,7 +80,7 @@ class RegistrationPage extends Component {
 
                   <div className="form-row justify-content-center">
                     <div className="form-group col-md-3">
-                      <label for="inputCity">City</label>
+                      <label htmlFor="inputCity">City</label>
                       <input
                         type="text"
                         className="form-control"
@@ -75,14 +88,14 @@ class RegistrationPage extends Component {
                       />
                     </div>
                     <div className="form-group col-md-3">
-                      <label for="inputState">State</label>
+                      <label htmlFor="inputState">State</label>
                       <select id="inputState" className="form-control">
                         <option selected>Choose...</option>
                         <option>...</option>
                       </select>
                     </div>
                     <div className="form-group col-md-2">
-                      <label for="inputZip">Zip</label>
+                      <label htmlFor="inputZip">Zip</label>
                       <input
                         type="text"
                         className="form-control"
@@ -93,7 +106,7 @@ class RegistrationPage extends Component {
 
                   <div className="form-row justify-content-center">
                     <div className="form-group col-md-8">
-                      <label for="inputAddress">Address</label>
+                      <label htmlFor="inputAddress">Address</label>
                       <input
                         type="text"
                         className="form-control"

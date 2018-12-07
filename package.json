@@ -6,6 +6,7 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.1.3",
     "fontawesome": "^4.7.2",
+    "joy": "^0.1.1",
     "jquery": "^3.3.1",
     "lodash": "^4.17.11",
     "popper": "^1.0.1",
