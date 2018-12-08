@@ -12,13 +12,38 @@ class RegistrationPage extends Component {
       country: "Bulgaria",
       zip: "",
       address: ""
-    }
+    },
+    errors: {}
   };
 
   username = React.createRef();
 
+  validate = () => {
+    const errors = {};
+    const { user } = this.state;
+    console.log("Validating...", user);
+    if (user.email.trim() === "") {
+      console.log("Sorry bro, you have no email");
+      errors.email = "Please enter an email";
+    }
+
+    if (user.sirName.trim() === "") {
+      console.log("Sorry bro, you have sir errorsname");
+      errors.sirName = "Please enter an sir name";
+    }
+
+    return Object.keys(errors).length === 0 ? null : errors;
+  };
+
   handleSubmit = e => {
     e.preventDefault();
+
+    const errors = this.validate();
+    this.setState({ errors: errors || {} }); //never set it to undefined
+    if (errors) {
+      console.log("Sorry bro, you have errors");
+      return;
+    }
 
     console.log(
       "Proba Sending data with user name: ",
@@ -40,7 +65,7 @@ class RegistrationPage extends Component {
   };
 
   render() {
-    const { user } = this.state;
+    const { user, errors } = this.state;
     return (
       <div className="cotainer mt-4">
         <div className="row justify-content-center">
@@ -65,6 +90,9 @@ class RegistrationPage extends Component {
                         placeholder="Email"
                         ref={this.username}
                       />
+                      {errors.email && (
+                        <div className="alert alert-danger">{errors.email}</div>
+                      )}
                     </div>
                   </div>
 
@@ -119,6 +147,11 @@ class RegistrationPage extends Component {
                         name="sirName"
                         placeholder="Sir Name"
                       />
+                      {errors.sirName && (
+                        <div className="alert alert-danger">
+                          {errors.sirName}
+                        </div>
+                      )}
                     </div>
                   </div>
 
@@ -173,7 +206,11 @@ class RegistrationPage extends Component {
                     </div>
                   </div>
 
-                  <button type="submit" className="btn btn-primary">
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    disabled={this.validate()}
+                  >
                     Sign in
                   </button>
                 </form>
