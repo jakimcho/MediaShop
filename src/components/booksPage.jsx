@@ -1,12 +1,59 @@
 import React, { Component } from "react";
 import axios from "axios";
+// import BooksTable from "./booksTable";
 
 class BooksPage extends Component {
-  state = { books: [] };
+  state = {
+    books: [],
+    currentPage: 1,
+    pageSize: 4,
+    searchQuery: "",
+    sortColumn: { path: "title", order: "asc" }
+  };
 
   async componentDidMount() {
     console.log("Books page loaded and Retrieving data....");
     // const { data: books } = await axios.get("http://127.0.0.1:3001/api/books");
+    const books = this.getMockedBooks();
+
+    this.setState({ books });
+    console.log("Got books from service:", books);
+    //this.setState({ books });
+  }
+
+  render() {
+    const { length: count } = this.state.books;
+    const { pageSize, currentPage, sortColumn, searchQuery } = this.state;
+    const { totalCount, data: books } = this.getPagedData();
+    return (
+      <div>
+        <h1>This is where the Books will display</h1>
+        <h3>Books: {this.state.books.length}</h3>
+        {/*         <BooksTable
+          books={books} // here props should be used
+          sortColumn={sortColumn}
+          onSort={this.handleSort}
+          onOrder={this.handleOrder}
+        /> */}
+      </div>
+    );
+  }
+
+  getPagedData = () => {
+    const { books: allBooks } = this.state;
+
+    return { totalCount: allBooks.length, data: allBooks };
+  };
+
+  handleSort = sortColumn => {
+    this.setState({ sortColumn });
+  };
+
+  handleOrder = book => {
+    console.log("Book is ordered: ", book);
+  };
+
+  getMockedBooks = () => {
     const books = [
       {
         isPublished: true,
@@ -42,43 +89,8 @@ class BooksPage extends Component {
       }
     ];
 
-    this.setState({ books });
-    console.log("Got books from service:", books);
-    //this.setState({ books });
-  }
-
-  render() {
-    return (
-      <div>
-        <h1>This is where the Books will display</h1>
-        <h3>Books: {this.state.books.length}</h3>
-        <table className="table table-primary">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Price</th>
-              <th>Available</th>
-              <th />
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.books.map(book => (
-              <tr>
-                <td>{book.title}</td>
-                <td>{book.author}</td>
-                <td>{book.price}</td>
-                <td>{book.isPublished}</td>
-                <td>
-                  <button>Buy</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  }
+    return books;
+  };
 }
 
 export default BooksPage;
