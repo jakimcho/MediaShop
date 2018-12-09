@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-// import BooksTable from "./booksTable";
+import BooksTable from "./booksTable";
 
 class BooksPage extends Component {
   state = {
@@ -29,12 +29,12 @@ class BooksPage extends Component {
       <div>
         <h1>This is where the Books will display</h1>
         <h3>Books: {this.state.books.length}</h3>
-        {/*         <BooksTable
+        <BooksTable
           books={books} // here props should be used
           sortColumn={sortColumn}
           onSort={this.handleSort}
           onOrder={this.handleOrder}
-        /> */}
+        />
       </div>
     );
   }
