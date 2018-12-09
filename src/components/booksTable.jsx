@@ -27,7 +27,7 @@ class BooksTable extends Component {
 
   state = {};
   render() {
-    const { books, onSort, onOrder, sortColumn } = this.props;
+    const { books, onSort, onOrder, sortColumn, onBookUpdate } = this.props;
     return (
       <Table
         columns={this.columns}
@@ -35,6 +35,7 @@ class BooksTable extends Component {
         sortColumn={sortColumn}
         onSort={onSort}
         onOrder={onOrder}
+        onUpdate={onBookUpdate}
       />
     );
   }

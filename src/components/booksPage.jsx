@@ -29,11 +29,15 @@ class BooksPage extends Component {
       <div>
         <h1>This is where the Books will display</h1>
         <h3>Books: {this.state.books.length}</h3>
+        <button className="btn btn-toolbar" onClick={this.handleAddBook}>
+          Add
+        </button>
         <BooksTable
           books={books} // here props should be used
           sortColumn={sortColumn}
           onSort={this.handleSort}
           onOrder={this.handleOrder}
+          onBookUpdate={this.handleUpdateBook}
         />
       </div>
     );
@@ -52,6 +56,36 @@ class BooksPage extends Component {
   handleOrder = book => {
     console.log("Book is ordered: ", book);
   };
+
+  handleAddBook = () => {
+    const book = this.mockAddBookService();
+    const books = [book, ...this.state.books];
+
+    this.setState({ books });
+  };
+
+  handleUpdateBook = book => {
+    console.log("Start updating book: ", book);
+    const books = this.state.books;
+    const updatedBookIndex = books.indexOf(book);
+    let newBook = { ...book };
+    newBook.title = "Updated";
+    books[updatedBookIndex] = { ...newBook };
+    this.setState({ books });
+  };
+
+  mockAddBookService() {
+    const book = {
+      isPublished: true,
+      _id: "5c0c15c44ab5163e59de6d51",
+      title: "New Book",
+      author: "Yakim",
+      price: 4.5,
+      __v: 0
+    };
+
+    return book;
+  }
 
   getMockedBooks = () => {
     const books = [
