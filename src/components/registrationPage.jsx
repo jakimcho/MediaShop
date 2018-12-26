@@ -1,5 +1,5 @@
+import userServices from "../services/userServices";
 import React, { Component } from "react";
-import axios from "axios";
 
 class RegistrationPage extends Component {
   state = {
@@ -31,6 +31,11 @@ class RegistrationPage extends Component {
       errors.sirName = "Please enter an sir name";
     }
 
+    if (user.password !== user.confirmPassword) {
+      console.log("Sorry bro Confirm password does not match");
+      errors.confirmPassword = "Confirm password does not match";
+    }
+
     return Object.keys(errors).length === 0 ? null : errors;
   };
 
@@ -45,20 +50,10 @@ class RegistrationPage extends Component {
     }
 
     try {
-      const user = { ...this.state.user };
-      delete user.confirmPassword;
-      console.log("Sending user registration... ", user);
-
-      const { data, headers } = await axios.post(
-        "http://localhost:3001/api/users/",
-        user
-      );
-
-      console.log("Registered user: ", data);
-
-      localStorage.setItem("token", headers["x-auth-token"]);
+      await userServices.register(this.state.user);
+      window.location = "/";
     } catch (ex) {
-      console.log("Error while trying to register user ", ex.response);
+      console.log("Error while trying to register user ", ex);
       const errors = { ...this.state.errors };
       errors.message = ex.data;
     }
@@ -70,7 +65,6 @@ class RegistrationPage extends Component {
     this.setState({ user });
   };
 
-  // destructuring the e (event object) and get currentTarget as alias input
   handleAllFieldsChange = ({ currentTarget: input }) => {
     const user = { ...this.state.user };
     user[input.name] = input.value;

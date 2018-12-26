@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import auth from "../services/auth";
 
 class LoginComponent extends Component {
   state = {
@@ -18,17 +18,10 @@ class LoginComponent extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
-    try {
-      const { data: jwt } = await axios.post(
-        "http://localhost:3001/api/auth/",
-        this.state.login
-      );
 
-      console.log("Got result from auth: ", jwt);
-      localStorage.setItem("token", jwt);
-    } catch (e) {
-      console.log("Exception occured: ", e);
-    }
+    const { email, password } = this.state.login;
+    await auth.login(email, password);
+    window.location = "/";
   };
 
   render() {
