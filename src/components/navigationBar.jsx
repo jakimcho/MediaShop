@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import LoginComponent from "./loginComponent";
 
-const NavigationBar = () => {
+const NavigationBar = ({ user }) => {
+  console.log("current logged in user: ", user);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Link className="navbar-brand" to="#">
@@ -41,32 +43,35 @@ const NavigationBar = () => {
             </Link>
           </li>
         </ul>
-        <form className="form-inline my-2 my-lg-0">
-          <input
-            className="form-control mr-sm-1"
-            type="email"
-            placeholder="username"
-            aria-label="username"
-          />
-          <input
-            className="form-control mr-sm-1"
-            type="password"
-            placeholder="password"
-            aria-label="password"
-          />
-          <button
-            className="btn btn-outline-success my-2 my-sm-0"
-            type="submit"
-          >
-            Login
-          </button>
-        </form>
-        <Link
-          className="btn btn-outline-success my-2 my-sm-0 m-2"
-          to="/registration"
-        >
-          Register
-        </Link>
+
+        {!user && (
+          <React.Fragment>
+            <LoginComponent />
+            <Link
+              className="btn btn-outline-success my-2 my-sm-0 m-2"
+              to="/registration"
+            >
+              Register
+            </Link>
+          </React.Fragment>
+        )}
+
+        {user && (
+          <React.Fragment>
+            <Link
+              className="btn btn-outline-success my-2 my-sm-0 m-2"
+              to="/profile"
+            >
+              {user.firstName}
+            </Link>
+            <Link
+              className="btn btn-outline-success my-2 my-sm-0 m-2"
+              to="/logout"
+            >
+              Logout
+            </Link>
+          </React.Fragment>
+        )}
       </div>
     </nav>
   );

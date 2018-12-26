@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 import NavigationBar from "./components/navigationBar";
 import BooksPage from "./components/booksPage";
 import SongsPage from "./components/songsPage";
@@ -9,10 +10,29 @@ import MoviesPage from "./components/moviesPage";
 import RegistrationPage from "./components/registrationPage";
 
 class App extends Component {
+  state = {
+    user: null
+  };
+
+  componentDidMount() {
+    let user = null;
+    try {
+      const jwt = localStorage.getItem("token");
+      console.log("Token from local storage: ", jwt);
+      user = jwtDecode(jwt);
+      this.setState({ user });
+    } catch (ex) {
+      console.log("Problem while decoding: ", ex);
+      // will do nothing here, It is as annonymouse user is logged in
+    }
+
+    console.log("after decoding token: ", user);
+  }
+
   render() {
     return (
       <div className="App">
-        <NavigationBar />
+        <NavigationBar user={this.state.user} />
         <div role="main" className="container">
           <Switch>
             <Route
@@ -22,7 +42,8 @@ class App extends Component {
             <Route path="/books" component={BooksPage} />
             <Route path="/songs" component={SongsPage} />
             <Route path="/registration" component={RegistrationPage} />
-            <Route path="/" component={HomePage} />
+            <Route path="/home" component={HomePage} />
+            <Redirect from="/" to="/home" />
           </Switch>
         </div>
       </div>

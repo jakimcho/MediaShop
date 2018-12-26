@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class RegistrationPage extends Component {
   state = {
@@ -15,8 +16,6 @@ class RegistrationPage extends Component {
     },
     errors: {}
   };
-
-  username = React.createRef();
 
   validate = () => {
     const errors = {};
@@ -35,7 +34,7 @@ class RegistrationPage extends Component {
     return Object.keys(errors).length === 0 ? null : errors;
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
 
     const errors = this.validate();
@@ -45,10 +44,24 @@ class RegistrationPage extends Component {
       return;
     }
 
-    console.log(
-      "Proba Sending data with user name: ",
-      this.username.current.value
-    );
+    try {
+      const user = { ...this.state.user };
+      delete user.confirmPassword;
+      console.log("Sending user registration... ", user);
+
+      const { data, headers } = await axios.post(
+        "http://localhost:3001/api/users/",
+        user
+      );
+
+      console.log("Registered user: ", data);
+
+      localStorage.setItem("token", headers["x-auth-token"]);
+    } catch (ex) {
+      console.log("Error while trying to register user ", ex.response);
+      const errors = { ...this.state.errors };
+      errors.message = ex.data;
+    }
   };
 
   handleEmailChange = e => {
@@ -88,7 +101,6 @@ class RegistrationPage extends Component {
                         className="form-control"
                         id="email"
                         placeholder="Email"
-                        ref={this.username}
                       />
                       {errors.email && (
                         <div className="alert alert-danger">{errors.email}</div>
