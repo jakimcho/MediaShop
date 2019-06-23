@@ -5,7 +5,7 @@ const port = config.get("backEnd.port");
 const apiPath = config.get("backEnd.apiPath"); */
 
 const userver = "localhost";
-const port = 3001;
+const port = 3002;
 const apiPath = "api";
 
 
