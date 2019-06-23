@@ -1,5 +1,6 @@
 import JRTable from "./common/jrTable";
 import React from "react";
+import { getMovies } from "../services/moviesServices";
 import _ from "lodash";
 
 const columns = ["Title", "Genre"];
@@ -23,20 +24,11 @@ class MoviesTable extends JRTable {
     return <tbody>{rows}</tbody>;
   };
 
-  componentDidMount = () => {
-    //const data = moviesServices.getMovies();
-    const data = this.getMovies();
+  componentDidMount = async () => {
+    const data = await getMovies();
+    //const data = this.getMovies();
     console.log(`mounting data ${JSON.stringify(data)}`);
     this.setState({ data });
-  };
-
-  getMovies = () => {
-    return [
-      { title: "fsdfs", genre: { name: "fdfdf" } },
-      { title: "f3sdfs", genre: { name: "fdfdf" } },
-      { title: "fs2dfs", genre: { name: "fdfdf" } },
-      { title: "fsdfs1", genre: { name: "fdfdf" } }
-    ];
   };
 }
 
